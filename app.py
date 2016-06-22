@@ -78,7 +78,6 @@ def days_in_a_row(dich):
     if(t[0] > 0):
         return 0
 
-
     if(len(t) == 1):
         return 1
 
@@ -86,13 +85,13 @@ def days_in_a_row(dich):
     for t1,t2 in zip(t[0:-1], t[1:]):
         totaldelta.append(t2-t1)
 
-
     # now look for the first occurence of >1 in the totaldelta series
     nrun = 0
-    while ((t[nrun] < 2) and (nrun < len(t))):
+    while ((totaldelta[nrun] < 2) and ((nrun+1) < len(totaldelta))):
         nrun = nrun + 1
 
     ntot = nrun + 1
+
     return ntot
 
 
