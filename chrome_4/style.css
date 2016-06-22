@@ -1,11 +1,15 @@
 .selection_bubble {
   visibility: hidden;
   position: absolute;
+  border: 3px solid #B8B8B8;
   color:black;
   top: 20px;
   left:0;
   right:0;
+  margin:auto;
   padding:20px;
-  width:80%;
+  width:60%;
   background-color: white;
+  border-radius: 15px;
+
 }
