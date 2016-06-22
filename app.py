@@ -72,7 +72,7 @@ def days_in_a_row(dich):
         dd = deltat.days
         ddays.append(dd)
 
-    t = sorted(ddays)
+    t = sorted(list(set(ddays)))
 
     totaldelta = []
     for t1,t2 in zip(t[0:-1], t[1:]):
@@ -84,7 +84,7 @@ def days_in_a_row(dich):
 
     # now look for the first occurence of >1 in the totaldelta series
     nrun = 0
-    while (t[nrun] < 2):
+    while ((t[nrun] < 2) and (nrun < len(t))):
         nrun = nrun + 1
 
     ntot = nrun + 1
