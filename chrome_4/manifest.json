@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "My Cool Extension",
+  "name": "AstroBadger",
   "version": "0.1",
   "background": {
     "scripts": ["background.js"]
@@ -14,6 +14,6 @@
     }
   ],
   "browser_action": {
-    "default_icon": "icon.png"
+    "default_icon": "badger.png"
   }
 }
