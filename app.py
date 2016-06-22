@@ -74,13 +74,18 @@ def days_in_a_row(dich):
 
     t = sorted(list(set(ddays)))
 
+    # if t[0] is not 0, then a day has been missed
+    if(t[0] > 0):
+        return 0
+
+
+    if(len(t) == 1):
+        return 1
+
     totaldelta = []
     for t1,t2 in zip(t[0:-1], t[1:]):
         totaldelta.append(t2-t1)
 
-    # if t[0] is not 0, then a day has been missed
-    if(t[0] > 0):
-        return 0
 
     # now look for the first occurence of >1 in the totaldelta series
     nrun = 0
