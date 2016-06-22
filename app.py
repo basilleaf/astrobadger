@@ -12,7 +12,8 @@ r_server = redis.StrictRedis.from_url(REDIS_URL)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 @app.route('/admin/')
-def index():
+def admin():
+    """ lists all users """
     all_badgers = loads(r_server.get('all_badgers'))
     all_badgers_sorted = collections.OrderedDict(sorted(all_badgers.items(), reverse=True))
     kwargs = {'badgers': all_badgers_sorted }
@@ -21,6 +22,7 @@ def index():
 
 @app.route('/<username>/')
 def user(username):
+    """ displays a single user """
     all_badgers = loads(r_server.get('all_badgers'))
     this_badger = all_badgers[username]
     this_badger_sorted = collections.OrderedDict(sorted(this_badger.items(), reverse=True))
@@ -31,6 +33,7 @@ def user(username):
 
 @app.route('/<username>/add/', methods=['POST'])
 def add(username):
+    """ add a new word count for a user """
     word_count = request.form['count']
     dt = datetime.now()
     # post_date = dt.isoformat("T").split('T')[0]
@@ -47,7 +50,9 @@ def add(username):
     this_badger_sorted = collections.OrderedDict(sorted(this_badger.items(), reverse=True))
 
     kwargs = {'username': username, 'badger': this_badger_sorted}
-    return render_template('user.html', **kwargs)
+
+    return redirect(url_for('user', username=username))
+    # return render_template('user.html', **kwargs)
 
 def days_in_a_row(this_badger):
     # this_badger is like: { date: number, date: number }

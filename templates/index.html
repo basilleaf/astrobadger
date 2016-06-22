@@ -12,20 +12,26 @@
         </h2>
 
 
-        <div>
+        {% if days %}
+          <div>
+            <p>You're on a {{ days }} day streak!</p>
 
-          {% for _ in range(1, days) %}
-            X
-          {% endfor %}
-        </div>
+            {% for _ in range(1, days) %}
+              X
+            {% endfor %}
+          </div>
 
-        <div style = "margin-top:50px">
-            <ul>
-                {% for date, count in values.items() %}
-                      <li><span style = "color:gray">{{ date }}</span>: <strong>{{ count }}</strong></li>
-                {% endfor %}
-            </ul>
-        </div>
+        {% else %}
+
+          <div style = "margin-top:50px;">
+              <ul>
+                  {% for date, count in values.items() %}
+                        <li><span style = "color:gray">{{ date }}</span>: <strong>{{ count }}</strong></li>
+                  {% endfor %}
+              </ul>
+          </div>
+
+        {% endif %}
 
     </div>
     {% endfor %}
