@@ -1,6 +1,7 @@
 import os
 import redis
 import collections
+import dateutil.parser
 from flask import Flask, request, render_template, redirect, jsonify, url_for, abort
 from json import loads, dumps
 from datetime import datetime, timedelta
@@ -57,6 +58,7 @@ def add(username):
 def days_in_a_row(dich):
     # this_badger is like: { date: number, date: number }
     # given a dictionary of days,
+
     dt = datetime.now()
     post_date = dt.isoformat("T")
 
@@ -87,8 +89,6 @@ def days_in_a_row(dich):
 
     ntot = nrun + 1
     return ntot
-
-
 
 
 
