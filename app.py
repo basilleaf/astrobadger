@@ -34,8 +34,8 @@ def add(username):
     r_server.set('all_badgers', dumps(all_badgers))
 
     this_badger = all_badgers[username]
-    this_badger_sorted = collections.OrderedDict(sorted(this_badger.items()))
-    kwargs = {'username': username, 'badger': this_badger}
+    this_badger_sorted = collections.OrderedDict(sorted(this_badger.items(), reverse=True))
+    kwargs = {'username': username, 'badger': this_badger_sorted}
     return render_template('user.html', **kwargs)
 
 
