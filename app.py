@@ -23,7 +23,8 @@ def index():
 def add(username):
     word_count = request.form['count']
     dt = datetime.now()
-    post_date = dt.isoformat("T").split('T')[0]
+    # post_date = dt.isoformat("T").split('T')[0]
+    post_date = dt.isoformat("T")
 
     all_badgers = loads(r_server.get('all_badgers'))
     all_badgers.setdefault(username, {})
