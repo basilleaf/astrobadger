@@ -15,6 +15,9 @@
     }
   ],
   "browser_action": {
-    "default_icon": "badger.png"
-  }
+    "default_icon": "badger16.png"
+  },
+  "icons": {  "16": "badger16.png",
+              "48": "badger48.png",
+             "128": "badger128.png"}
 }
