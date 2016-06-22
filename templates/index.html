@@ -2,13 +2,12 @@
 {% block body %}
 
 
+<div class = "content">
 <ul>
     {% for username, values in badgers.items() %}
     <div style = "border-top:1px solid gray; padding:20px">
         <h2>
-            <a name = "{{ username }}">
-                {{ username }}</a>
-            </a>
+            Way to go {{ username }}!
         </h2>
 
 
@@ -16,8 +15,8 @@
           <div>
             <p>You're on a {{ days }} day streak!</p>
 
-            {% for _ in range(1, days) %}
-              X
+            {% for _ in range(0, days) %}
+              <img src = "http://127.0.0.1:5000/static/badger48.png">
             {% endfor %}
           </div>
 
@@ -37,5 +36,5 @@
     {% endfor %}
 </ul>
 
-
+</div>
 {% endblock %}
