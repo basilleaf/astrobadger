@@ -1,0 +1,18 @@
+<ul>
+    <div style = "border-top:1px solid gray; padding:20px">
+        <h2>
+            <a name = "{{ username }}">
+                {{ username }}</a>
+            </a>
+        </h2>
+
+        <div><span style = "color:gray"></span> </div>
+
+            <ul>
+                {% for date, count in badger.items() %}
+                        <li><span style = "color:gray">{{ date }}</span>: {{ count }}</li>
+
+                {% endfor %}
+            </ul>
+    </div>
+</ul>
