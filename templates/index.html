@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+
+
+<ul>
+    {% for username, values in all_badgers.items() %}
+    <div style = "border-top:1px solid gray; padding:20px">
+        <h2>
+            <a name = "{{ username }}">
+                {{ username }}</a>
+            </a>
+        </h2>
+
+        <div><span style = "color:gray"></span> </div>
+
+            <ul>
+                {% for date, count in values.items() %}
+                        <li><span style = "color:gray">{{ date }}</span>: {{ count }}</li>
+
+                {% endfor %}
+            </ul>
+    </div>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
