@@ -11,11 +11,21 @@ r_server = redis.StrictRedis.from_url(REDIS_URL)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
-@app.route('/')
+@app.route('/admin/')
 def index():
     all_badgers = loads(r_server.get('all_badgers'))
-    all_badgers_sorted = collections.OrderedDict(sorted(all_badgers.items()))
-    kwargs = {'all_badgers': all_badgers_sorted}
+    all_badgers_sorted = collections.OrderedDict(sorted(all_badgers.items(), reverse=True))
+    kwargs = {'badgers': all_badgers_sorted }
+    return render_template('index.html', **kwargs)
+
+
+@app.route('/<username>/')
+def user(username):
+    all_badgers = loads(r_server.get('all_badgers'))
+    this_badger = all_badgers[username]
+    this_badger_sorted = collections.OrderedDict(sorted(this_badger.items(), reverse=True))
+    days = days_in_a_row(this_badger)
+    kwargs = {'badgers': { username: this_badger_sorted }, 'days': days }
     return render_template('index.html', **kwargs)
 
 
@@ -35,8 +45,15 @@ def add(username):
 
     this_badger = all_badgers[username]
     this_badger_sorted = collections.OrderedDict(sorted(this_badger.items(), reverse=True))
+
     kwargs = {'username': username, 'badger': this_badger_sorted}
     return render_template('user.html', **kwargs)
+
+def days_in_a_row(this_badger):
+    # this_badger is like: { date: number, date: number }
+    return 42
+
+
 
 
 if __name__ == '__main__':

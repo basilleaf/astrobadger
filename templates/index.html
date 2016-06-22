@@ -3,7 +3,7 @@
 
 
 <ul>
-    {% for username, values in all_badgers.items() %}
+    {% for username, values in badgers.items() %}
     <div style = "border-top:1px solid gray; padding:20px">
         <h2>
             <a name = "{{ username }}">
@@ -11,14 +11,22 @@
             </a>
         </h2>
 
-        <div><span style = "color:gray"></span> </div>
 
+        <div>
+
+          {% for _ in range(1, days) %}
+            X
+          {% endfor %}
+        </div>
+
+        <div style = "margin-top:50px">
             <ul>
                 {% for date, count in values.items() %}
-                        <li><span style = "color:gray">{{ date }}</span>: <strong>{{ count }}</strong></li>
-
+                      <li><span style = "color:gray">{{ date }}</span>: <strong>{{ count }}</strong></li>
                 {% endfor %}
             </ul>
+        </div>
+
     </div>
     {% endfor %}
 </ul>
