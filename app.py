@@ -3,7 +3,7 @@ import redis
 import collections
 from flask import Flask, request, render_template, redirect, jsonify, url_for, abort
 from json import loads, dumps
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 REDIS_URL = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
@@ -54,9 +54,40 @@ def add(username):
     return redirect(url_for('user', username=username))
     # return render_template('user.html', **kwargs)
 
-def days_in_a_row(this_badger):
+def days_in_a_row(dich):
     # this_badger is like: { date: number, date: number }
-    return 42
+    # given a dictionary of days,
+    dt = datetime.now()
+    post_date = dt.isoformat("T")
+
+    # find midnight tonight
+    midnight_tonight = (dt + timedelta(days=1)).replace(microsecond=0,second=0,minute=0, hour=0)
+
+    # make a list output
+    ddays = []
+    for key in dich:
+        deltat = midnight_tonight - dateutil.parser.parse(key)
+        dd = deltat.days
+        ddays.append(dd)
+
+    t = sorted(ddays)
+
+    totaldelta = []
+    for t1,t2 in zip(t[0:-1], t[1:]):
+        totaldelta.append(t2-t1)
+
+    # if t[0] is not 0, then a day has been missed
+    if(t[0] > 0):
+        return 0
+
+    # now look for the first occurence of >1 in the totaldelta series
+    nrun = 0
+    while (t[nrun] < 2):
+        nrun = nrun + 1
+
+    ntot = nrun + 1
+    return ntot
+
 
 
 
