@@ -14,11 +14,20 @@ function getselection() {
 
 // Move that bubble to the appropriate location.
 // thanks http://stackoverflow.com/questions/4409378/text-selection-and-bubble-overlay-as-chrome-extension
-function renderBubble(html) {
+function renderBubble(data) {
+
+    try {
+      html = $(data).find('.content').html();
+    } catch(e) {
+      html = data;
+    }
+
     // Add bubble to the top of the page.
     var bubbleDOM = document.createElement('div');
     bubbleDOM.setAttribute('class', 'selection_bubble');
     document.body.appendChild(bubbleDOM);
+
+    $('.selection_bubble').css('top', $(window).scrollTop() + 20);
 
     // Close the bubble when we click on the screen.
     // todo: replace this so it doesn't keep adding same even listener
@@ -38,9 +47,14 @@ chrome.runtime.onMessage.addListener(
       // var firstHref = $("a[href^='http']").eq(0).attr("href");
       var count = getselection().split(' ').length;
 
+      if (count < 201) {
+          renderBubble('No Badger For You! <br><br> Please write 200 words.');
+          return;
+      }
+
       var username = 'Matt'; // hard coding this for now
-      var url = 'https://obscure-cliffs-10478.herokuapp.com/';
-      // var url = 'http://127.0.0.1:5000/';  // dev
+      // var url = 'https://obscure-cliffs-10478.herokuapp.com/';
+      var url = 'http://127.0.0.1:5000/';  // dev
 
       word_count = { 'count': count }  // this gets build from user highlight/button click
 
