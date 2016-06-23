@@ -53,8 +53,8 @@ chrome.runtime.onMessage.addListener(
       }
 
       var username = 'Matt'; // hard coding this for now
-      // var url = 'https://obscure-cliffs-10478.herokuapp.com/';
-      var url = 'http://127.0.0.1:5000/';  // dev
+      var url = 'https://obscure-cliffs-10478.herokuapp.com/';
+      // var url = 'http://127.0.0.1:5000/';  // dev
 
       word_count = { 'count': count }  // this gets build from user highlight/button click
 
